@@ -17,6 +17,8 @@ program
   .helpOption('-h, --help', 'display help for command')
   .argument('<filepath1>', 'path to first file')
   .argument('<filepath2>', 'path to second file')
-  .action(genDiff);
+  .action((filepath1, filepath2, options) => {
+    console.log(genDiff(filepath1, filepath2))
+  });
 
 program.parse()
