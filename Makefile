@@ -1,8 +1,19 @@
+.PHONY: install test lint
+
 install:
 	npm ci
 
-publish:
-	npm publish --dry-run
+test:
+	npm test
+
+test-watch:
+	npm run test:watch
+
+test-coverage:
+	npm run test:coverage
 
 lint:
-	npx eslint .
+	npm run lint
+
+lint-fix:
+	npm run lint:fix

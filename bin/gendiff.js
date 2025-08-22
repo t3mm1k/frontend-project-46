@@ -2,7 +2,7 @@
 
 import { createRequire } from 'node:module'
 import { Command } from 'commander'
-import genDiff from '../src/index.js';
+import genDiff from '../src/index.js'
 
 const require = createRequire(import.meta.url)
 const { version } = require('../package.json')
@@ -17,8 +17,8 @@ program
   .helpOption('-h, --help', 'display help for command')
   .argument('<filepath1>', 'path to first file')
   .argument('<filepath2>', 'path to second file')
-  .action((filepath1, filepath2, options) => {
+  .action((filepath1, filepath2) => {
     console.log(genDiff(filepath1, filepath2))
-  });
+  })
 
 program.parse()
