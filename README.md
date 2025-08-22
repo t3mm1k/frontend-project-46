@@ -6,3 +6,5 @@
 
 ### Get diff json
 [![asciicast](https://asciinema.org/a/jYYi50waHKiBLtyaE2DvkLivS.svg)](https://asciinema.org/a/jYYi50waHKiBLtyaE2DvkLivS)
+### Get diff yml 
+[![asciicast](https://asciinema.org/a/eAZu6u8n12vUQCBrJIb9oj9vB.svg)](https://asciinema.org/a/eAZu6u8n12vUQCBrJIb9oj9vB)
