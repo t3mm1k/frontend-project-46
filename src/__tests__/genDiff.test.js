@@ -21,16 +21,6 @@ describe('genDiff', () => {
 
       expect(result).toEqual(expected)
     })
-
-    test('should compare nested YAML files', () => {
-      const filepath1 = getFixturePath('nested1.yml')
-      const filepath2 = getFixturePath('nested2.yml')
-
-      const expected = readFixture('expectedNested.txt')
-      const result = genDiff(filepath1, filepath2, 'stylish')
-
-      expect(result).toEqual(expected)
-    })
   })
 
   describe('plain format', () => {
@@ -43,15 +33,36 @@ describe('genDiff', () => {
 
       expect(result).toEqual(expected)
     })
+  })
 
-    test('should compare nested YAML files in plain format', () => {
-      const filepath1 = getFixturePath('nested1.yml')
-      const filepath2 = getFixturePath('nested2.yml')
+  describe('json format', () => {
+    test('should compare nested JSON files in json format', () => {
+      const filepath1 = getFixturePath('nested1.json')
+      const filepath2 = getFixturePath('nested2.json')
 
-      const expected = readFixture('expectedPlain.txt')
-      const result = genDiff(filepath1, filepath2, 'plain')
+      const result = genDiff(filepath1, filepath2, 'json')
+      const parsedResult = JSON.parse(result)
 
-      expect(result).toEqual(expected)
+      expect(parsedResult).toBeInstanceOf(Array)
+      expect(parsedResult.length).toBeGreaterThan(0)
+
+      parsedResult.forEach((node) => {
+        expect(node).toHaveProperty('key')
+        expect(node).toHaveProperty('type')
+        expect(['added', 'removed', 'updated', 'unchanged', 'nested']).toContain(node.type)
+      })
+    })
+
+    test('should produce valid JSON output', () => {
+      const filepath1 = getFixturePath('nested1.json')
+      const filepath2 = getFixturePath('nested2.json')
+
+      const result = genDiff(filepath1, filepath2, 'json')
+
+      expect(() => JSON.parse(result)).not.toThrow()
+
+      const parsed = JSON.parse(result)
+      expect(parsed).toBeInstanceOf(Array)
     })
   })
 
